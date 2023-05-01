@@ -1,13 +1,19 @@
-const express = require('express');
+const account = require('../routes/account');
 const bodyParser = require('body-parser');
+const config = require('../config/database');
+const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const config = require('../config/database');
-const account = require('../routes/account');
+const passport = require('passport');
 
 const app = express();
 
 const port = 3000;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('../config/passport');
 
 app.use(bodyParser.json());
 
