@@ -1,0 +1,20 @@
+.form-signup {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signup input {
+  border-radius: 0;
+}
+
+.form-signup .form-floating:first-of-type input {
+  margin-bottom: -1px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.form-signup input[type="password"] {
+  margin-bottom: 10px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}

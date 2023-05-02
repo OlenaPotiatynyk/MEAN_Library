@@ -1,1 +1,54 @@
-<p>registration works!</p>
+<main class="form-signup w-100 m-auto">
+  <form (submit)="userRegisterSubmit()">
+    <h1 class="h3 mb-3 fw-normal">Create your account</h1>
+    <p>Have an account? <a routerLink="/auth">Log in now</a></p>
+
+    <div class="form-floating">
+      <input [(ngModel)]="name"
+             name="name"
+             type="text"
+             class="form-control"
+             id="signupName"
+             placeholder="Name">
+      <label for="signupName">Name (optional)</label>
+    </div>
+    <div class="form-floating">
+      <input [(ngModel)]="login"
+             name="login"
+             type="text"
+             class="form-control"
+             id="signupLogin"
+             placeholder="Login">
+      <label for="signupLogin">Login</label>
+    </div>
+    <div class="form-floating">
+      <input [(ngModel)]="email"
+             name="email"
+             type="email"
+             class="form-control"
+             id="signupEmail"
+             placeholder="name@example.com">
+      <label for="signupEmail">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input [(ngModel)]="password"
+             name="password"
+             type="password"
+             class="form-control"
+             id="signupPassword"
+             placeholder="Password">
+      <label for="signupPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary"
+            type="submit"
+            [disabled]="!login || !email || !password">
+      Sign up
+    </button>
+  </form>
+</main>
