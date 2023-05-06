@@ -1,5 +1,7 @@
 import {Component, ElementRef, HostListener, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {DataService} from "../data.service";
+import {HttpClient} from "@angular/common/http";
 
 function requiredFileType(type: string) {
   return function (control: FormControl) {
@@ -26,19 +28,45 @@ export class UploadComponent {
   @Input() progress: any;
 
   file: File | null = null;
-  signup = new FormGroup({
-    file: new FormControl(null, [Validators.required, requiredFileType('pdf')]),
-    description: new FormControl(null, Validators.required)
+  upload = new FormGroup({
+    file: new FormControl(null, [Validators.required, requiredFileType('jpg')]),
+    description: new FormControl('', Validators.required),
+    fileSource: new FormControl('', [Validators.required])
   });
 
-  @HostListener('change', ['$event.target.files']) emitFiles( event: FileList ) {
+  @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
     this.file = event && event.item(0);
   }
 
-  constructor( private host: ElementRef<HTMLInputElement> ) {
+  constructor(
+    private host: ElementRef<HTMLInputElement>,
+    private dataService: DataService,
+    private http: HttpClient) {
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.upload.patchValue({
+        fileSource: file
+      });
+    }
   }
 
   submit() {
+    if (this.upload.valid) {
+      const formData = new FormData();
+      formData.append('file', this.upload.value.fileSource ? this.upload.value.fileSource : new Blob());
+      formData.append('description', this.upload.value.description ? this.upload.value.description : '');
+
+      this.http.post('http://localhost:3000/upload', formData)
+        .subscribe(res => {
+          console.log(res);
+          alert('Uploaded Successfully.');
+        })
+    } else {
+      console.log('not valid')
+    }
 
   }
 }
