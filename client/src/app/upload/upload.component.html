@@ -1,0 +1,13 @@
+<form [formGroup]="signup" (ngSubmit)="submit()">
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupFile">Upload</label>
+    <input type="file" class="form-control" id="inputGroupFile">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Description</span>
+    <textarea class="form-control" aria-label="Description" formControlName="description"></textarea>
+  </div>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-primary">Submit</button>
+  </div>
+</form>

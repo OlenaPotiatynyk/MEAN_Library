@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -12,6 +14,12 @@ export class RegistrationComponent {
   email: String | undefined;
   password: String | undefined;
 
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+  }
+
   userRegisterSubmit() {
     const user = {
       name: this.name,
@@ -20,6 +28,12 @@ export class RegistrationComponent {
       password: this.password
     };
 
-
+    this.authService.signUpUser(user).subscribe(data => {
+      if(!data._id) {
+        this.router.navigate(['/reg']).then(() => console.log('Something went wrong'));
+      } else {
+        this.router.navigate(['/auth']).then(() => console.log('Sign Up success'));
+      }
+    });
   }
 }

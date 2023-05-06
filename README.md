@@ -13,5 +13,5 @@
 ### Stack
 - NodeJS 18.16.0 (installed - required)
 - MongoDB 6.0.5
-- Angular 2.4 with CLI
+- Angular 15.2.7 with CLI
 - Docker 1.13.1 (installed - required)

@@ -1,10 +1,13 @@
 const account = require('../routes/account');
+const data = require('../routes/data');
 const bodyParser = require('body-parser');
 const config = require('../config/database');
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const passport = require('passport');
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
@@ -12,6 +15,8 @@ const port = 3000;
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
+app.use(fileUpload());
 
 require('../config/passport');
 
@@ -32,6 +37,7 @@ app.get('/', (req, res) => {
     res.send('Main page');
 });
 app.use('/account', account);
+app.use('/upload', data);
 
 app.listen(port, () => {
     console.log("Server started on port: " + port)

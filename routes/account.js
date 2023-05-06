@@ -9,21 +9,14 @@ const config = require('../config/database');
 //     res.send('Registration page');
 // });
 
-router.post('/reg', (req, res) => {
-    let newUser = new User({
+router.post('/reg', async(req, res) => {
+    const newUser = await User.create({
         name: req.body.name,
         email: req.body.email,
         login: req.body.login,
         password: req.body.password
     });
-
-    User.addUser(newUser, (err, user) => {
-        if (err) {
-            res.json ({success: false, msg: "User not added"})
-        } else {
-            res.json ({success: true, msg: "User added successfully"})
-        }
-    })
+    return res.status(200).json(newUser);
 });
 
 router.post('/auth', (req, res) => {
