@@ -27,7 +27,7 @@ export class UploadComponent {
 
   file: File | null = null;
   signup = new FormGroup({
-    file: new FormControl(null, [Validators.required, requiredFileType('png')]),
+    file: new FormControl(null, [Validators.required, requiredFileType('pdf')]),
     description: new FormControl(null, Validators.required)
   });
 

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, Observable} from "rxjs";
-import {response} from "express";
 
 interface UserPostResponse {
   _id: any;
@@ -30,7 +29,4 @@ export class AuthService {
       user, { headers: headers }).pipe(map((resp: any) => resp));
   }
 
-  saveFile() {
-    
-  }
 }
