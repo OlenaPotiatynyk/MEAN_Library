@@ -1,6 +1,12 @@
 import {Component} from '@angular/core';
 import {DataService} from "../data.service";
-import {HttpClient} from "@angular/common/http";
+
+interface FileListResponse {
+  name: string,
+  description: string,
+  owner: string,
+  id: string
+}
 
 @Component({
   selector: 'app-home',
@@ -12,28 +18,7 @@ export class HomeComponent {
 
   constructor(private dataService: DataService) { }
 
-  list = [
-    {
-      file: 'Some file name 01',
-      description: 'Some loooooong description',
-      owner: 'Some Good Guy'
-    },
-    {
-      file: 'Some file name 02',
-      description: 'Some loooooong description',
-      owner: 'Some Good Guy'
-    },
-    {
-      file: 'Some file name 03',
-      description: 'Some loooooong description',
-      owner: 'Some Good Guy'
-    },
-    {
-      file: 'Some file name 04',
-      description: 'Some loooooong description',
-      owner: 'Some Good Guy'
-    }
-  ]
+  list: FileListResponse[] = [];
 
   ngOnInit() {
     this.getData();
@@ -42,7 +27,11 @@ export class HomeComponent {
 
   getData() {
     this.dataService.getFilesList().subscribe((res) => {
-      console.log(res);
+      this.list = res.data;
     })
+  }
+
+  downloadFile(id: string, name: string) {
+    this.dataService.downloadFile(id, name);
   }
 }

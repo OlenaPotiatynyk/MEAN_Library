@@ -69,18 +69,5 @@ export class UploadComponent {
     } else {
       console.log('not valid')
     }
-
-  }
-
-  getAll() {
-    console.log("sdad")
-    this.http.get('http://localhost:3000/files', { responseType: 'blob' }).subscribe(blob => {
-      const a = document.createElement('a')
-      const objectUrl = URL.createObjectURL(blob)
-      a.href = objectUrl
-      a.download = 'archive.pdf';
-      a.click();
-      URL.revokeObjectURL(objectUrl);
-    })
   }
 }

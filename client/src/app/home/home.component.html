@@ -1,10 +1,10 @@
 <div class="card mb-3" *ngFor="let file of list">
   <div class="card-body">
-    <h5 class="card-title">{{file.file}}</h5>
+    <h5 class="card-title">{{file.name}}</h5>
     <p class="card-text">{{file.description}}</p>
     <div class="d-flex justify-content-end">
-      <a href="#" class="btn btn-outline">Owner: {{file.owner}}</a>
-      <a href="#" class="btn btn-secondary">
+      <a href="#" class="btn btn-outline">Owner: {{file.owner || 'unknown'}}</a>
+      <a href="#" class="btn btn-secondary" (click)="downloadFile(file.id, file.name)">
         Download file
       </a>
     </div>

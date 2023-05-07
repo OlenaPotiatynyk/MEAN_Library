@@ -26,4 +26,27 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/info', (req, res) => {
+    Book.find().then((docs) => {
+        const response = {
+            data: []
+        };
+        docs.forEach(doc => {
+            response.data.push({
+                id: doc._id.toString(),
+                name: doc.name,
+                description: doc.description
+            })
+        })
+        res.status(200).send(response);
+    });
+});
+
+router.get('/:id', async (req, res) => {
+    await Book.findById(req.params.id).then((docs) => {
+        fs.writeFileSync('public/' + docs.name, docs.content);
+        res.download('public/' + docs.name);
+    });
+});
+
 module.exports = router;
