@@ -29,7 +29,7 @@ export class UploadComponent {
 
   file: File | null = null;
   upload = new FormGroup({
-    file: new FormControl(null, [Validators.required, requiredFileType('jpg')]),
+    file: new FormControl(null, [Validators.required, requiredFileType('pdf')]),
     description: new FormControl('', Validators.required),
     fileSource: new FormControl('', [Validators.required])
   });
@@ -68,5 +68,17 @@ export class UploadComponent {
       console.log('not valid')
     }
 
+  }
+
+  getAll() {
+    console.log("sdad")
+    this.http.get('http://localhost:3000/upload', { responseType: 'blob' }).subscribe(blob => {
+      const a = document.createElement('a')
+      const objectUrl = URL.createObjectURL(blob)
+      a.href = objectUrl
+      a.download = 'archive.pdf';
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+    })
   }
 }

@@ -10,13 +10,13 @@ const config = require('../config/database');
 // });
 
 router.post('/reg', async(req, res) => {
-    const newUser = await User.create({
+    await User.addUser({
         name: req.body.name,
         email: req.body.email,
         login: req.body.login,
         password: req.body.password
-    });
-    return res.status(200).json(newUser);
+    }, res);
+    return res.status(200);
 });
 
 router.post('/auth', (req, res) => {
