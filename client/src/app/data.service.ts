@@ -20,7 +20,11 @@ export class DataService {
   uploadFile(file: FileRequest): Observable<FilePostResponse> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<FilePostResponse>('http://localhost:3000/upload',
+    return this.http.post<FilePostResponse>('http://localhost:3000/files',
       file, { headers: headers }).pipe(map((resp: any) => resp));
+  }
+
+  getFilesList() {
+    return this.http.request('GET', 'http://localhost:3000/files', {responseType:'json'});
   }
 }

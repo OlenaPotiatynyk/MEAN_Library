@@ -29,7 +29,7 @@ export class UploadComponent {
 
   file: File | null = null;
   upload = new FormGroup({
-    file: new FormControl(null, [Validators.required, requiredFileType('pdf')]),
+    file: new FormControl('', [Validators.required, requiredFileType('pdf')]),
     description: new FormControl('', Validators.required),
     fileSource: new FormControl('', [Validators.required])
   });
@@ -59,10 +59,12 @@ export class UploadComponent {
       formData.append('file', this.upload.value.fileSource ? this.upload.value.fileSource : new Blob());
       formData.append('description', this.upload.value.description ? this.upload.value.description : '');
 
-      this.http.post('http://localhost:3000/upload', formData)
+      this.http.post('http://localhost:3000/files', formData)
         .subscribe(res => {
           console.log(res);
           alert('Uploaded Successfully.');
+
+          this.upload.reset();
         })
     } else {
       console.log('not valid')
@@ -72,7 +74,7 @@ export class UploadComponent {
 
   getAll() {
     console.log("sdad")
-    this.http.get('http://localhost:3000/upload', { responseType: 'blob' }).subscribe(blob => {
+    this.http.get('http://localhost:3000/files', { responseType: 'blob' }).subscribe(blob => {
       const a = document.createElement('a')
       const objectUrl = URL.createObjectURL(blob)
       a.href = objectUrl

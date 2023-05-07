@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
     res.send('Main page');
 });
 app.use('/account', account);
-app.use('/upload', data);
+app.use('/files', data);
 
 app.listen(port, () => {
     console.log("Server started on port: " + port)

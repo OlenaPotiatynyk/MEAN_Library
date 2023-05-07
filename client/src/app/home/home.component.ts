@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {DataService} from "../data.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,9 @@ import { Component } from '@angular/core';
 })
 
 export class HomeComponent {
+
+  constructor(private dataService: DataService) { }
+
   list = [
     {
       file: 'Some file name 01',
@@ -29,4 +34,15 @@ export class HomeComponent {
       owner: 'Some Good Guy'
     }
   ]
+
+  ngOnInit() {
+    this.getData();
+    console.log('OnInit');
+  }
+
+  getData() {
+    this.dataService.getFilesList().subscribe((res) => {
+      console.log(res);
+    })
+  }
 }
