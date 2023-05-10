@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const config = require('../config/database');
-const {BSON, Binary} = require("bson");
 const fs = require("fs");
 
 const FileSchema = mongoose.Schema({
@@ -21,9 +18,7 @@ const FileSchema = mongoose.Schema({
 
 const Book = module.exports = mongoose.model('File', FileSchema);
 
-module.exports.addFile = async (newFile, path, callback) => {
-    // newFile.content = BSON.deserialize(newFile.content.data);
+module.exports.addFile = async (newFile, path) => {
     newFile.content = fs.readFileSync(path)
     await Book.create(newFile);
-
 };

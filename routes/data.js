@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     const file = req.files.file;
     const path = req.files.file.name;
 
-    await file.mv('public/' + path, (err, success) => {
+    await file.mv('public/' + path, () => {
         Book.addFile({
             name: path,
             description: req.body.description,
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', (req, res) => {
     const query = {description: '123'};
-    Book.findOne(query).then((docs) => {
+    Book.findOne(query).then(docs => {
         fs.writeFileSync('public/' + docs.name, docs.content);
         res.download('public/' + docs.name);
     });
@@ -42,8 +42,8 @@ router.get('/info', (req, res) => {
     });
 });
 
-router.get('/:id', async (req, res) => {
-    await Book.findById(req.params.id).then((docs) => {
+router.get('/:id', (req, res) => {
+    Book.findById(req.params.id).then((docs) => {
         fs.writeFileSync('public/' + docs.name, docs.content);
         res.download('public/' + docs.name);
     });
