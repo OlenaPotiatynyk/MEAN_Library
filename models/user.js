@@ -22,9 +22,9 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
-module.exports.getUserByLogin = (login, callback) => {
+module.exports.getUserByLogin = (login) => {
     const query = {login: login};
-    User.findOne(query, callback);
+    return User.findOne(query);
 };
 
 module.exports.getUserById = (id, callback) => {
