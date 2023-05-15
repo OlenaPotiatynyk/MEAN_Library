@@ -17,16 +17,16 @@ export class HeaderComponent {
   }
 
   userIsLogged() {
-    const user = localStorage.getItem('user') || '';
-    if(user !== '') {
+    const user = localStorage.getItem('user') || undefined;
+    if(user !== undefined) {
       this.userLogin = JSON.parse(user).login;
     }
-    console.log(this.userLogin);
-    return this.userLogin !== '';
+    return this.userLogin !== undefined;
   }
 
   userLoggedOut() {
     this.authService.logout();
+    this.userLogin = undefined;
     this.router.navigate(['/auth']).then(() => console.log('Log Out success'));
   }
 }
