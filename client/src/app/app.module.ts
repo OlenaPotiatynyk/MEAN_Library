@@ -13,6 +13,7 @@ import {AuthService} from './auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import {UploadComponent} from './upload/upload.component';
 import {DataService} from "./data.service";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {DataService} from "./data.service";
     AuthComponent,
     DashboardComponent,
     HomeComponent,
-    UploadComponent
+    UploadComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

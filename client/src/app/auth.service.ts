@@ -49,4 +49,10 @@ export class AuthService {
     this.token = token;
     this.user = user;
   }
+
+  logout() {
+    this.token = undefined;
+    this.user = undefined;
+    localStorage.clear()
+  }
 }
