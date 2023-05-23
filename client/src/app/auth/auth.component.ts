@@ -29,7 +29,7 @@ export class AuthComponent {
         console.log('Something went wrong');
       } else {
         this.router.navigate(['/']).then(() => console.log('Login success'));
-        this.authService.storeUser(data.token, user);
+        this.authService.storeUser(data.token, data.user);
       }
     })
   }

@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  userLogin: string | undefined;
+  userName: string | undefined;
 
   constructor(
     private authService: AuthService,
@@ -19,14 +19,14 @@ export class HeaderComponent {
   userIsLogged() {
     const user = localStorage.getItem('user') || undefined;
     if(user !== undefined) {
-      this.userLogin = JSON.parse(user).login;
+      this.userName = JSON.parse(user).name ? JSON.parse(user).name : JSON.parse(user).login;
     }
-    return this.userLogin !== undefined;
+    return this.userName !== undefined;
   }
 
   userLoggedOut() {
     this.authService.logout();
-    this.userLogin = undefined;
+    this.userName = undefined;
     this.router.navigate(['/auth']).then(() => console.log('Log Out success'));
   }
 }

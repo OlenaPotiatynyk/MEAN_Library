@@ -5,7 +5,8 @@ import {map, Observable} from "rxjs";
 interface UserPostResponse {
   token: string;
   _id: any;
-  success: boolean
+  success: boolean;
+  user: any
 }
 
 interface UserLogin {
