@@ -15,6 +15,7 @@ interface UserLogin {
 
 interface User extends UserLogin {
   name: String | undefined;
+  role: String | undefined;
   email: String | undefined;
 }
 

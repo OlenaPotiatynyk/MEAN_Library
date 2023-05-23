@@ -22,6 +22,17 @@
       <label for="signupLogin">Login</label>
     </div>
     <div class="form-floating">
+      <select [(ngModel)]="role"
+              class="form-select"
+              id="signupRole"
+              [ngModelOptions]="{standalone: true}">
+        <option disabled>Choose a role</option>
+        <option value="1">Teacher</option>
+        <option value="2">Student</option>
+      </select>
+      <label for="signupRole">Role</label>
+    </div>
+    <div class="form-floating">
       <input [(ngModel)]="email"
              name="email"
              type="email"

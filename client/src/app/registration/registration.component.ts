@@ -11,6 +11,7 @@ export class RegistrationComponent {
 
   name: String | undefined;
   login: String | undefined;
+  role: String | undefined;
   email: String | undefined;
   password: String | undefined;
 
@@ -24,6 +25,7 @@ export class RegistrationComponent {
     const user = {
       name: this.name,
       login: this.login,
+      role: this.role,
       email: this.email,
       password: this.password
     };

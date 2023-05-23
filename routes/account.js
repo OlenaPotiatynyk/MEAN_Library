@@ -5,15 +5,12 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
-// router.get('/reg', (req, res) => {
-//     res.send('Registration page');
-// });
-
 router.post('/reg', async(req, res) => {
     await User.addUser({
         name: req.body.name,
         email: req.body.email,
         login: req.body.login,
+        role: req.body.role,
         password: req.body.password
     }, res);
     return res.status(200);
@@ -45,7 +42,8 @@ router.post('/auth', (req, res) => {
                             id: user._id,
                             name: user.name,
                             login: user.login,
-                            email: user.email
+                            email: user.email,
+                            role: user.role
                         }
                     })
                 } else {
