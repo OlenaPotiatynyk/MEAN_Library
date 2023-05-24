@@ -1,0 +1,29 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{file.name}}</h5>
+    <p class="card-text">{{file.description}}</p>
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-secondary">Show comments</button>
+      <button type="button" class="btn btn-secondary" (click)="showAddCommentInput()">+ Add comment</button>
+      <button type="button" class="btn btn-primary">Evaluate the work</button>
+      <a href="#" class="btn btn-outline">Owner: {{file.owner || 'unknown'}}</a>
+      <a href="#" class="btn btn-secondary" (click)="downloadFile(file.id, file.name)">
+        Download file
+      </a>
+    </div>
+    <div *ngIf="file.comments">
+      <div *ngFor="let comment of file.comments">
+        <p>{{comment.name}}: {{comment.text}}</p>
+      </div>
+    </div>
+    <div *ngIf="addCommentInput">
+      <form [formGroup]="addComment" (ngSubmit)="submitComment()">
+        <div class="input-group mb-3 mt-3">
+          <input type="text" class="form-control" placeholder="Add comment" aria-label="Add comment"
+                 aria-describedby="comment" formControlName="text">
+          <button class="btn btn-outline-secondary" type="submit" id="comment">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
