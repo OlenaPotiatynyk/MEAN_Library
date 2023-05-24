@@ -10,7 +10,7 @@
     <button class="btn btn-outline-success" type="submit">Search</button>
   </form>
 
-  <div class="col-md-3 text-end" *ngIf="!userIsLogged() === true">
+  <div class="col-md-3 text-end" *ngIf="!userIsLogged()">
     <a routerLink="/auth" type="button" class="btn btn-outline-primary me-2">Login</a>
     <a routerLink="/reg" type="button" class="btn btn-primary">Sign up</a>
   </div>

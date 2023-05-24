@@ -54,20 +54,18 @@ export class UploadComponent {
   }
 
   submit() {
-    if (this.upload.valid) {
-      const formData = new FormData();
-      formData.append('file', this.upload.value.fileSource ? this.upload.value.fileSource : new Blob());
-      formData.append('description', this.upload.value.description ? this.upload.value.description : '');
+    if (!this.upload.valid) return;
 
-      this.http.post('http://localhost:3000/files', formData)
-        .subscribe(res => {
-          console.log(res);
-          alert('Uploaded Successfully.');
+    const formData = new FormData();
+    formData.append('file', this.upload.value.fileSource ? this.upload.value.fileSource : new Blob());
+    formData.append('description', this.upload.value.description ? this.upload.value.description : '');
 
-          this.upload.reset();
-        })
-    } else {
-      console.log('not valid')
-    }
+    this.http.post('http://localhost:3000/files', formData)
+      .subscribe(res => {
+        console.log(res);
+        alert('Uploaded Successfully.');
+
+        this.upload.reset();
+      })
   }
 }

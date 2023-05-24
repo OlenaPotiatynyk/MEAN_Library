@@ -1,12 +1,6 @@
 import {Component} from '@angular/core';
 import {DataService} from "../data.service";
-
-interface FileListResponse {
-  name: string,
-  description: string,
-  owner: string,
-  id: string
-}
+import {DocumentCard} from "../interfaces/data-interface";
 
 @Component({
   selector: 'app-home',
@@ -16,22 +10,19 @@ interface FileListResponse {
 
 export class HomeComponent {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+  }
 
-  list: FileListResponse[] = [];
+  list: DocumentCard[] = [];
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getData();
     console.log('OnInit');
   }
 
-  getData() {
+  getData(): void {
     this.dataService.getFilesList().subscribe((res) => {
       this.list = res.data;
     })
-  }
-
-  downloadFile(id: string, name: string) {
-    this.dataService.downloadFile(id, name);
   }
 }

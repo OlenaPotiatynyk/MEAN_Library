@@ -18,7 +18,7 @@ export class HeaderComponent {
 
   userIsLogged() {
     const user = localStorage.getItem('user') || undefined;
-    if(user !== undefined) {
+    if(user) {
       this.userName = JSON.parse(user).name ? JSON.parse(user).name : JSON.parse(user).login;
     }
     return this.userName !== undefined;

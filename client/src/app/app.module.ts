@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {UploadComponent} from './upload/upload.component';
 import {DataService} from "./data.service";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DocumentCardComponent } from './document-card/document-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     DashboardComponent,
     HomeComponent,
     UploadComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DocumentCardComponent
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,7 @@ export class DataService {
   }
 
   getFilesList(): Observable<any> {
-    return this.http.request('GET', this.server + '/files/info', {responseType:'json'});
+    return this.http.get(this.server + '/files/info', {responseType:'json'});
   }
 
   downloadFile(id: string, name: string): void {
@@ -48,5 +48,21 @@ export class DataService {
     //add search
   }
 
+  addComment(id: number, text: string) {
+    const user = localStorage.getItem('user');
+    let userName;
 
+    if(user) {
+      userName = JSON.parse(user).name ? JSON.parse(user).name : JSON.parse(user).login;
+    }
+
+    const data = {
+      name: userName,
+      text: text
+    }
+
+    this.http.patch(this.server + '/files/' + id, data).subscribe(resp => {
+      console.log("hi this is patch request", resp);
+    })
+  }
 }

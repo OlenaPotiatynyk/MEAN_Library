@@ -1,15 +1,7 @@
-<div class="card mb-3" *ngFor="let file of list">
-  <div class="card-body">
-    <h5 class="card-title">{{file.name}}</h5>
-    <p class="card-text">{{file.description}}</p>
-    <div class="d-flex justify-content-end">
-      <a href="#" class="btn btn-outline">Owner: {{file.owner || 'unknown'}}</a>
-      <a href="#" class="btn btn-secondary" (click)="downloadFile(file.id, file.name)">
-        Download file
-      </a>
-    </div>
-  </div>
-</div>
+<app-document-card
+  *ngFor="let file of list"
+  [file]="file">
+</app-document-card>
 
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
