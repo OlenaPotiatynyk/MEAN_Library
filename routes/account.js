@@ -6,6 +6,12 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 router.post('/reg', async(req, res) => {
+    const login = req.body.login;
+    User.getUserByLogin(login).then(user => {
+        if(user) {
+            return res.json({success: false, msg: "User with this login already exist. Try another login."});
+        }});
+
     await User.addUser({
         name: req.body.name,
         email: req.body.email,
