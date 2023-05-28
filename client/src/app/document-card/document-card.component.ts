@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {DocumentCard} from "../interfaces/data-interface";
 import {DataService} from "../data.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-document-card',
@@ -34,4 +35,11 @@ export class DocumentCardComponent {
     this.addComment.reset();
     this.showAddCommentInput();
   }
+
+  submitScore(scoreForm: NgForm): void {
+    if (scoreForm.value.score < 0 || scoreForm.value.score > 100) return;
+
+    console.log(scoreForm.value.score);
+    scoreForm.reset();
+}
 }

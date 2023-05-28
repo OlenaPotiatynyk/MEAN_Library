@@ -8,5 +8,6 @@ export interface DocumentCard {
       name: string,
       text: string
     }
-  ]
+  ],
+  evaluation: number
 }
