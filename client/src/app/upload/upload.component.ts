@@ -59,6 +59,9 @@ export class UploadComponent {
     const formData = new FormData();
     formData.append('file', this.upload.value.fileSource ? this.upload.value.fileSource : new Blob());
     formData.append('description', this.upload.value.description ? this.upload.value.description : '');
+    // @ts-ignore
+    formData.append('owner', JSON.parse(localStorage.getItem('user')).name);
+
 
     this.http.post('http://localhost:3000/files', formData)
       .subscribe(res => {

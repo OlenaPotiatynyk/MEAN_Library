@@ -5,8 +5,8 @@ export interface DocumentCard {
   id: string,
   comments: [
     {
-      name: string,
-      text: string
+      author: string,
+      content: string
     }
   ],
   evaluation: number

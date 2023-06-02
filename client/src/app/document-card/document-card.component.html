@@ -1,6 +1,6 @@
 <div class="card mb-3">
   <div class="card-body">
-    <h5 class="card-title">{{file.name}}</h5>
+    <h5 class="card-title">{{file.name}} + {{file.id}}</h5>
     <p class="card-text">{{file.description}}</p>
     <div class="d-flex justify-content-between">
       <button type="button" class="btn btn-secondary">Show comments</button>
@@ -14,13 +14,13 @@
         Your score: {{file.evaluation}}
       </div>
       <a href="#" class="btn btn-outline">Owner: {{file.owner || 'unknown'}}</a>
-      <a href="#" class="btn btn-secondary" (click)="downloadFile(file.id, file.name)">
+      <a class="btn btn-secondary" (click)="downloadFile(file.id, file.name)">
         Download file
       </a>
     </div>
     <div *ngIf="file.comments">
       <div *ngFor="let comment of file.comments">
-        <p>{{comment.name}}: {{comment.text}}</p>
+        <p>{{comment.author}}: {{comment.content}}</p>
       </div>
     </div>
     <div *ngIf="addCommentInput">

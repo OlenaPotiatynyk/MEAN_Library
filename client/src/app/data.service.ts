@@ -48,7 +48,7 @@ export class DataService {
     //add search
   }
 
-  addComment(id: number, text: string) {
+  addComment(id: string, comment: string) {
     const user = localStorage.getItem('user');
     let userName;
 
@@ -57,8 +57,8 @@ export class DataService {
     }
 
     const data = {
-      name: userName,
-      text: text
+      author: userName,
+      content: comment
     }
 
     this.http.patch(this.server + '/files/' + id, data).subscribe(resp => {

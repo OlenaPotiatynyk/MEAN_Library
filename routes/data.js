@@ -11,7 +11,8 @@ router.post('/', async (req, res) => {
         Book.addFile({
             name: path,
             description: req.body.description,
-            content: file
+            content: file,
+            owner: req.body.owner,
         }, 'public/' + path);
         return res.json({success: true});
     });
@@ -35,7 +36,9 @@ router.get('/info', (req, res) => {
             response.data.push({
                 id: doc._id.toString(),
                 name: doc.name,
-                description: doc.description
+                description: doc.description,
+                owner: doc.owner,
+                comments: doc.comments
             })
         })
         res.status(200).send(response);
@@ -47,6 +50,14 @@ router.get('/:id', (req, res) => {
         fs.writeFileSync('public/' + docs.name, docs.content);
         res.download('public/' + docs.name);
     });
+});
+
+router.patch('/:id', (req, res) => {
+    const comment = req.body;
+
+    Book.findOneAndUpdate({_id: req.params.id}, {"$push": {"comments": comment}})
+        .then(() => res.status(200).send())
+        .catch(err => console.log(err));
 });
 
 module.exports = router;

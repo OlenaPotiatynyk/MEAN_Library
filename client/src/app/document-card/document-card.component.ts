@@ -32,6 +32,8 @@ export class DocumentCardComponent {
     if (!this.addComment.valid) return;
 
     console.log(this.addComment.value.text);
+    // @ts-ignore
+    this.dataService.addComment(this.file.id, this.addComment.value.text);
     this.addComment.reset();
     this.showAddCommentInput();
   }

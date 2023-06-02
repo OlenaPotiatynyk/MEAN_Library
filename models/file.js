@@ -1,5 +1,23 @@
 const mongoose = require('mongoose');
 const fs = require("fs");
+const {Timestamp} = require("bson");
+
+// const CommentSchema = mongoose.Schema({
+//     time: {
+//         type: Date,
+//         default: Date.now,
+//     },
+//     author: {
+//         type: String,
+//         require: true
+//     },
+//     content: {
+//         type: String,
+//         require: true
+//     },
+// })
+//
+// const Comment = mongoose.model('Comment', CommentSchema);
 
 const FileSchema = mongoose.Schema({
     name: {
@@ -12,6 +30,27 @@ const FileSchema = mongoose.Schema({
     },
     content: {
         type: Buffer,
+        require: true
+    },
+    owner: {
+        type: String,
+        require: true
+    },
+    comments: {
+        type: [{
+            time: {
+                type: Date,
+                default: Date.now,
+            },
+            author: {
+                type: String,
+                require: true
+            },
+            content: {
+                type: String,
+                require: true
+            },
+        }],
         require: true
     }
 });
