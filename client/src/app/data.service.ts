@@ -44,8 +44,8 @@ export class DataService {
     })
   }
 
-  search() {
-    //add search
+  search(search: string): Observable<any> {
+    return this.http.get(this.server + '/files?search=' + search, {responseType:'json'});
   }
 
   addComment(id: string, content: string) {

@@ -59,6 +59,8 @@ const FileSchema = mongoose.Schema({
     }
 });
 
+FileSchema.index({name: 'text', description: 'text', owner: 'text'});
+
 const Book = module.exports = mongoose.model('File', FileSchema);
 
 module.exports.addFile = async (newFile, path) => {

@@ -20,10 +20,21 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    const query = {description: '123'};
-    Book.findOne(query).then(docs => {
-        fs.writeFileSync('public/' + docs.name, docs.content);
-        res.download('public/' + docs.name);
+    Book.find({$text: {$search: req.query.search}}).then((docs) => {
+        const response = {
+            data: []
+        };
+        docs.forEach(doc => {
+            response.data.push({
+                id: doc._id.toString(),
+                name: doc.name,
+                description: doc.description,
+                owner: doc.owner,
+                evaluation: doc.evaluation,
+                comments: doc.comments
+            })
+        })
+        res.status(200).send(response);
     });
 });
 

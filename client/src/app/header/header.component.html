@@ -5,8 +5,8 @@
     <a routerLink="/upload" class="nav-link px-2 link-secondary">Upload file</a>
   </nav>
 
-  <form class="d-flex" role="search" *ngIf="userIsLogged()">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+  <form (submit)="searchSubmit()" class="d-flex" role="search" *ngIf="userIsLogged()">
+    <input [(ngModel)]="search" name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">Search</button>
   </form>
 
