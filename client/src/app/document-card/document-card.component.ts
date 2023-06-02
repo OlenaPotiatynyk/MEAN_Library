@@ -12,6 +12,7 @@ import {NgForm} from '@angular/forms';
 export class DocumentCardComponent {
   @Input() file!: DocumentCard;
 
+  showComments: boolean = false;
   addCommentInput: boolean = false;
   addComment = new FormGroup({
     text: new FormControl('', Validators.required)
@@ -44,4 +45,8 @@ export class DocumentCardComponent {
     console.log(scoreForm.value.score);
     scoreForm.reset();
 }
+
+  showCommentsToggle(): void {
+    this.showComments = !this.showComments;
+  }
 }

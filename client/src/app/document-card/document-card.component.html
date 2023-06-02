@@ -2,8 +2,10 @@
   <div class="card-body">
     <h5 class="card-title">{{file.name}} + {{file.id}}</h5>
     <p class="card-text">{{file.description}}</p>
-    <div class="d-flex justify-content-between">
-      <button type="button" class="btn btn-secondary">Show comments</button>
+    <div class="d-flex justify-content-between mb-3">
+      <button type="button" class="btn btn-secondary" (click)="showCommentsToggle()">
+        {{showComments? 'Hide' : 'Show'}} comments
+      </button>
       <button type="button" class="btn btn-secondary" (click)="showAddCommentInput()">+ Add comment</button>
       <form #scoreForm="ngForm" class="d-flex justify-content-between " *ngIf="!file.evaluation"
             (ngSubmit)="submitScore(scoreForm)">
@@ -18,9 +20,12 @@
         Download file
       </a>
     </div>
-    <div *ngIf="file.comments">
-      <div *ngFor="let comment of file.comments">
-        <p>{{comment.author}}: {{comment.content}}</p>
+    <div *ngIf="file.comments && showComments">
+      <div *ngFor="let comment of file.comments" class="card border-secondary mb-3">
+        <div class="card-body text-secondary">
+          <p class="card-text">{{comment.time | date:'short'}} // {{comment.author}}:</p>
+          <p class="card-text">{{comment.content}}</p>
+        </div>
       </div>
     </div>
     <div *ngIf="addCommentInput">
