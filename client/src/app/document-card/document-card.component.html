@@ -3,8 +3,11 @@
     <h5 class="card-title">{{file.name}}</h5>
     <p class="card-text">{{file.description}}</p>
     <div class="d-flex justify-content-between mb-3">
-      <button type="button" class="btn btn-outline-success" (click)="showCommentsToggle()">
+      <button type="button" class="btn btn-outline-success position-relative" (click)="showCommentsToggle()">
         {{showComments ? 'Hide' : 'Show'}} comments
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+          {{file.comments.length}}
+        </span>
       </button>
       <button type="button" class="btn btn-outline-success" (click)="showAddCommentInput()">+ Add comment</button>
       <form #scoreForm="ngForm" class="d-flex justify-content-between" *ngIf="!file.evaluation"
