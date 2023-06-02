@@ -10,7 +10,7 @@
              class="form-control"
              id="signupName"
              placeholder="Name">
-      <label for="signupName">Name (optional)</label>
+      <label for="signupName">Name</label>
     </div>
     <div class="form-floating">
       <input [(ngModel)]="login"
@@ -51,14 +51,9 @@
       <label for="signupPassword">Password</label>
     </div>
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div>
     <button class="w-100 btn btn-lg btn-primary"
             type="submit"
-            [disabled]="!login || !email || !password">
+            [disabled]="!name || !login || !email || !password">
       Sign up
     </button>
   </form>
