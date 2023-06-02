@@ -1,18 +1,18 @@
 <div class="card mb-3">
   <div class="card-body">
-    <h5 class="card-title">{{file.name}} + {{file.id}}</h5>
+    <h5 class="card-title">{{file.name}}</h5>
     <p class="card-text">{{file.description}}</p>
     <div class="d-flex justify-content-between mb-3">
       <button type="button" class="btn btn-secondary" (click)="showCommentsToggle()">
         {{showComments? 'Hide' : 'Show'}} comments
       </button>
       <button type="button" class="btn btn-secondary" (click)="showAddCommentInput()">+ Add comment</button>
-      <form #scoreForm="ngForm" class="d-flex justify-content-between " *ngIf="!file.evaluation"
+      <form #scoreForm="ngForm" class="d-flex justify-content-between" *ngIf="!file.evaluation"
             (ngSubmit)="submitScore(scoreForm)">
         <input ngModel required type="number" class="form-control" style="width: 4rem;" name="score" min="0" max="100">
         <button type="submit" class="btn btn-primary ms-1">Evaluate the work</button>
       </form>
-      <div *ngIf="file.evaluation">
+      <div *ngIf="file.evaluation" class="btn btn-outline" style="width: 14rem;">
         Your score: {{file.evaluation}}
       </div>
       <a href="#" class="btn btn-outline">Owner: {{file.owner || 'unknown'}}</a>

@@ -48,7 +48,7 @@ export class DataService {
     //add search
   }
 
-  addComment(id: string, comment: string) {
+  addComment(id: string, content: string) {
     const user = localStorage.getItem('user');
     let userName;
 
@@ -56,12 +56,33 @@ export class DataService {
       userName = JSON.parse(user).name ? JSON.parse(user).name : JSON.parse(user).login;
     }
 
-    const data = {
-      author: userName,
-      content: comment
+    const body = {
+      comment: {
+        author: userName,
+        content: content
+      }
     }
 
-    this.http.patch(this.server + '/files/' + id, data).subscribe(resp => {
+    this.http.patch(this.server + '/files/' + id, body).subscribe(resp => {
+      console.log("hi this is patch request", resp);
+    })
+  }
+
+  addEvaluation(id: string, evaluation: string) {
+    const user = localStorage.getItem('user');
+    let userName;
+
+    if(user) {
+      userName = JSON.parse(user).name ? JSON.parse(user).name : JSON.parse(user).login;
+    }
+
+    const body = {
+      evaluation: {
+        value: evaluation,
+      }
+    }
+
+    this.http.patch(this.server + '/files/' + id, body).subscribe(resp => {
       console.log("hi this is patch request", resp);
     })
   }

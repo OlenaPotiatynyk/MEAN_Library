@@ -36,6 +36,10 @@ const FileSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    evaluation: {
+        type: Number,
+        require: false
+    },
     comments: {
         type: [{
             time: {

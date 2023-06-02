@@ -43,6 +43,7 @@ export class DocumentCardComponent {
     if (scoreForm.value.score < 0 || scoreForm.value.score > 100) return;
 
     console.log(scoreForm.value.score);
+    this.dataService.addEvaluation(this.file.id, scoreForm.value.score);
     scoreForm.reset();
 }
 

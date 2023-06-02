@@ -38,6 +38,7 @@ router.get('/info', (req, res) => {
                 name: doc.name,
                 description: doc.description,
                 owner: doc.owner,
+                evaluation: doc.evaluation,
                 comments: doc.comments
             })
         })
@@ -53,11 +54,19 @@ router.get('/:id', (req, res) => {
 });
 
 router.patch('/:id', (req, res) => {
-    const comment = req.body;
+    const body = req.body;
 
-    Book.findOneAndUpdate({_id: req.params.id}, {"$push": {"comments": comment}})
-        .then(() => res.status(200).send())
-        .catch(err => console.log(err));
+    if (body.comment) {
+        Book.findOneAndUpdate({_id: req.params.id}, {"$push": {"comments": body.comment}})
+            .then(() => res.status(200).send())
+            .catch(err => console.log(err));
+    } else if (body.evaluation) {
+        Book.findOneAndUpdate({_id: req.params.id}, {"evaluation": body.evaluation.value})
+            .then(() => res.status(200).send())
+            .catch(err => console.log(err));
+    } else {
+        res.status(500).send();
+    }
 });
 
 module.exports = router;
