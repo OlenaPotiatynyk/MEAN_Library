@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 const fs = require("fs");
-const {Timestamp} = require("bson");
 
-// const CommentSchema = mongoose.Schema({
-//     time: {
-//         type: Date,
-//         default: Date.now,
-//     },
-//     author: {
-//         type: String,
-//         require: true
-//     },
-//     content: {
-//         type: String,
-//         require: true
-//     },
-// })
-//
-// const Comment = mongoose.model('Comment', CommentSchema);
+const CommentSchema = mongoose.Schema({
+        type: [{
+            time: {
+                type: Date,
+                default: Date.now,
+            },
+            author: {
+                type: String,
+                require: true
+            },
+            content: {
+                type: String,
+                require: true
+            },
+        }],
+        require: true
+    })
 
 const FileSchema = mongoose.Schema({
     name: {
@@ -40,30 +40,14 @@ const FileSchema = mongoose.Schema({
         type: Number,
         require: false
     },
-    comments: {
-        type: [{
-            time: {
-                type: Date,
-                default: Date.now,
-            },
-            author: {
-                type: String,
-                require: true
-            },
-            content: {
-                type: String,
-                require: true
-            },
-        }],
-        require: true
-    }
+    comments: CommentSchema
 });
 
 FileSchema.index({name: 'text', description: 'text', owner: 'text'});
 
-const Book = module.exports = mongoose.model('File', FileSchema);
+const FileList = module.exports = mongoose.model('File', FileSchema);
 
 module.exports.addFile = async (newFile, path) => {
     newFile.content = fs.readFileSync(path)
-    await Book.create(newFile);
+    await FileList.create(newFile);
 };
